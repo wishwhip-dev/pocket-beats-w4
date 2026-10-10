@@ -291,7 +291,7 @@ export function DrumMachine() {
                     aria-pressed={on}
                     onClick={() => toggleStep(instrument.id, step)}
                     className={cn(
-                      "h-11 rounded-md border transition-colors sm:h-11",
+                      "h-11 rounded-md border transition-colors",
                       "focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-1",
                       on ? "border-primary bg-primary text-primary-foreground" : "border-border bg-secondary hover:bg-accent",
                       currentStep === step && "bg-accent outline-2 outline-offset-0 outline-foreground",
