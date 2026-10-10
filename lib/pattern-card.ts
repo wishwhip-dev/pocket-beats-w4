@@ -123,7 +123,8 @@ export async function renderPatternCard(options: PatternCardOptions): Promise<Bl
   const mark = 48;
   ctx.fillStyle = accent;
   ctx.beginPath();
-  ctx.roundRect(padding, footerTop, mark, mark, 10);
+  if (typeof ctx.roundRect === "function") ctx.roundRect(padding, footerTop, mark, mark, 10);
+  else ctx.rect(padding, footerTop, mark, mark);
   ctx.fill();
   ctx.font = `600 40px ${FONT}`;
   ctx.fillStyle = MUTED;
