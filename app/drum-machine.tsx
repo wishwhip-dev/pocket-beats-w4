@@ -182,7 +182,7 @@ export function DrumMachine() {
 
   const clearPattern = () => {
     beforeClear.current = pattern;
-    setPattern(clonePattern(DEFAULT_PATTERN).map(() => new Array<boolean>(STEPS).fill(false)) as unknown as Pattern);
+    setPattern(emptyPattern());
     setChosenPreset("");
     setUndoable(true);
   };
