@@ -215,7 +215,7 @@ export function DrumMachine() {
             {playing ? "Stop" : "Play"}
           </Button>
           <div className="text-sm">
-            <p aria-live="polite">{playing ? `Playing — step ${currentStep === null ? 1 : currentStep + 1} of ${STEPS}` : "Stopped"}</p>
+            <p>{playing ? `Playing — step ${currentStep === null ? 1 : currentStep + 1} of ${STEPS}` : "Stopped"}</p>
             <p className="text-muted-foreground">{soundText}</p>
           </div>
         </div>
@@ -291,10 +291,10 @@ export function DrumMachine() {
                     aria-pressed={on}
                     onClick={() => toggleStep(instrument.id, step)}
                     className={cn(
-                      "h-9 rounded-md border transition-colors sm:h-10",
+                      "h-11 rounded-md border transition-colors sm:h-11",
                       "focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-1",
                       on ? "border-primary bg-primary text-primary-foreground" : "border-border bg-secondary hover:bg-accent",
-                      currentStep === step && "ring-2 ring-ring",
+                      currentStep === step && "bg-accent outline-2 outline-offset-0 outline-foreground",
                       step % 4 === 3 && "mr-2",
                     )}
                   />
