@@ -16,6 +16,7 @@ import {
   INSTRUMENTS,
   PRESETS,
   STEPS,
+  emptyPattern,
   loadMachineState,
   patternHitCount,
   randomPattern,
