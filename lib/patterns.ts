@@ -139,7 +139,6 @@ export const PRESETS: readonly Preset[] = [
 export function randomPattern(): Pattern {
   const pick = (chance: number) => Math.random() < chance;
   const pattern = emptyPattern();
-
   pattern.kick[0] = true;
   pattern.kick[8] = pick(0.6);
   pattern.kick[4] = pick(0.3);
