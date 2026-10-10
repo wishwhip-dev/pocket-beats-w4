@@ -86,7 +86,8 @@ export async function renderPatternCard(options: PatternCardOptions): Promise<Bl
 
   const roundCell = (x: number, cellY: number, w: number, h: number, fill: string, stroke?: string) => {
     ctx.beginPath();
-    ctx.roundRect(x, cellY, w, h, radius);
+    if (typeof ctx.roundRect === "function") ctx.roundRect(x, cellY, w, h, radius);
+    else ctx.rect(x, cellY, w, h);
     ctx.fillStyle = fill;
     ctx.fill();
     if (stroke) {
