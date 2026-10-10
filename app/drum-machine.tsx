@@ -257,9 +257,9 @@ export function DrumMachine() {
 
         <div className="flex flex-col sm:flex-row sm:items-center sm:gap-3">
           <div className="hidden sm:block sm:w-24 sm:shrink-0" />
-          <div className="grid flex-1 grid-cols-16 gap-1">
+          <div className="grid flex-1 grid-cols-16 gap-0.5 sm:gap-1">
             {Array.from({ length: STEPS }, (_, step) => (
-              <div key={step} className={cn("text-center text-[10px] text-muted-foreground", step % 4 === 3 && "mr-2")}>
+              <div key={step} className={cn("text-center text-[10px] text-muted-foreground", step % 4 === 3 && "sm:mr-2")}>
                 {step % 4 === 0 ? step / 4 + 1 : "·"}
               </div>
             ))}
@@ -282,7 +282,7 @@ export function DrumMachine() {
                   {muted ? "Muted" : "Mute"}
                 </Button>
               </div>
-              <div role="group" aria-label={`${instrument.label} steps`} className="grid flex-1 grid-cols-16 gap-1">
+              <div role="group" aria-label={`${instrument.label} steps`} className="grid flex-1 grid-cols-16 gap-0.5 sm:gap-1">
                 {pattern[instrument.id].map((on, step) => (
                   <button
                     key={step}
@@ -295,7 +295,7 @@ export function DrumMachine() {
                       "focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-1",
                       on ? "border-primary bg-primary text-primary-foreground" : "border-border bg-secondary hover:bg-accent",
                       currentStep === step && "bg-accent outline-2 outline-offset-0 outline-foreground",
-                      step % 4 === 3 && "mr-2",
+                      step % 4 === 3 && "sm:mr-2",
                     )}
                   />
                 ))}
