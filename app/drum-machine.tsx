@@ -96,10 +96,7 @@ export function DrumMachine() {
   useEffect(() => {
     if (!playing) return;
     const ctx = getAudioContext();
-    if (!ctx) {
-      setPlaying(false);
-      return;
-    }
+    if (!ctx) return;
     let step = 0;
     let nextTime = ctx.currentTime + 0.06;
     const pending: { step: number; time: number }[] = [];
