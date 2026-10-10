@@ -252,7 +252,7 @@ export function DrumMachine() {
 
       <section aria-label="Step grid" className="space-y-3 rounded-xl border border-border bg-card p-4">
         <p className="text-sm text-muted-foreground">
-          Tap a step to toggle it. Tab moves between steps; Enter or Space toggles. Muted: {mutedList.length ? mutedList.join(", ") : "none"}
+          Tap a step to toggle it. Tab moves between steps; Enter or Space toggles. On a phone, scroll the grid sideways to reach all 16 steps. Muted: {mutedList.length ? mutedList.join(", ") : "none"}
         </p>
 
         {/* Every step cell is a fixed 32px-wide tap target; the grid scrolls sideways on narrow
