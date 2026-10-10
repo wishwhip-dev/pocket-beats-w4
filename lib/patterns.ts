@@ -197,15 +197,16 @@ export function loadMachineState(): MachineState | null {
     const candidate = parsed as Record<string, unknown>;
     if (!isPattern(candidate.pattern)) return null;
     const bpm = typeof candidate.bpm === "number" && Number.isFinite(candidate.bpm) ? candidate.bpm : 120;
+    const mutes = typeof candidate.mutes === "object" && candidate.mutes !== null ? (candidate.mutes as Record<string, unknown>) : {};
     return {
       name: typeof candidate.name === "string" && candidate.name.trim() ? candidate.name : "My Beat",
       bpm: Math.min(200, Math.max(60, Math.round(bpm))),
       pattern: candidate.pattern,
       mutes: {
-        kick: candidate.mutes === true || (typeof candidate.mutes === "object" && candidate.mutes !== null && (candidate.mutes as Record<string, unknown>).kick === true),
-        snare: typeof candidate.mutes === "object" && candidate.mutes !== null && (candidate.mutes as Record<string, unknown>).snare === true,
-        hat: typeof candidate.mutes === "object" && candidate.mutes !== null && (candidate.mutes as Record<string, unknown>).hat === true,
-        clap: typeof candidate.mutes === "object" && candidate.mutes !== null && (candidate.mutes as Record<string, unknown>).clap === true,
+        kick: mutes.kick === true,
+        snare: mutes.snare === true,
+        hat: mutes.hat === true,
+        clap: mutes.clap === true,
       },
     };
   } catch {
