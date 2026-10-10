@@ -119,13 +119,17 @@ export function DrumMachine() {
     }, 25);
 
     let shown = -1;
+    let announced = -1;
     let raf = 0;
     const tick = () => {
       raf = requestAnimationFrame(tick);
       while (pending.length && pending[0].time <= ctx.currentTime) {
         shown = pending.shift()!.step;
       }
-      if (shown >= 0 && shown !== currentStep) setCurrentStep(shown);
+      if (shown >= 0 && shown !== announced) {
+        announced = shown;
+        setCurrentStep(shown);
+      }
     };
     raf = requestAnimationFrame(tick);
 
@@ -133,7 +137,6 @@ export function DrumMachine() {
       window.clearInterval(timer);
       cancelAnimationFrame(raf);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [playing]);
 
   const startPlayback = async () => {
