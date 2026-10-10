@@ -1,24 +1,19 @@
-import { StarterScene } from "./starter-scene";
+import { DrumMachine } from "./drum-machine";
 
 /**
- * The placeholder. Replace it, and delete `starter-scene.tsx` with it.
- *
- * It is a server component on purpose: the heading and the text below render on the server, so the
- * route has readable content before any script runs, and the drawing is a client island inside it.
+ * The drum machine. A server component so the heading renders before any script runs; the
+ * interactive machine is the client island below it.
  */
 export default function Home() {
   return (
-    <main className="mx-auto flex min-h-dvh max-w-4xl flex-col justify-center gap-6 px-6 py-12">
-      <div className="space-y-2">
-        <p className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">Ready to draw</p>
-        <h1 className="text-4xl font-semibold tracking-tight text-balance sm:text-5xl">
-          Describe this canvas app in the task goal.
-        </h1>
-        <p className="text-lg text-muted-foreground">
-          The coding agent will replace this starter scene with the requested visual, toy or game.
+    <main className="mx-auto flex min-h-dvh max-w-3xl flex-col gap-6 px-3 py-6 sm:px-6 sm:py-10">
+      <header className="space-y-1">
+        <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">Pocket Beats</h1>
+        <p className="text-muted-foreground">
+          A 16-step drum machine for kick, snare, hat and clap. Tap out a beat, press Play, and share the pattern.
         </p>
-      </div>
-      <StarterScene />
+      </header>
+      <DrumMachine />
     </main>
   );
 }

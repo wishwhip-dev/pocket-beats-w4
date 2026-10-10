@@ -6,7 +6,7 @@
  */
 export const identity = {
   name: "Pocket Beats",
-  description: "A tiny drum machine.",
-  accent: "#047857",
+  description: "Tap out drum beats on a 16-step grid, play them back, and share the pattern.",
+  accent: "#a9d977",
   initial: "P",
 } as const;
