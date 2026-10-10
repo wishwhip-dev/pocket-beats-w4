@@ -37,7 +37,17 @@ function row(steps: number[]): boolean[] {
   return cells;
 }
 
-function emptyPattern(): Pattern {
+/** An all-off pattern, e.g. as the result of Clear. */
+export function emptyPattern(): Pattern {
+  return {
+    kick: new Array<boolean>(STEPS).fill(false),
+    snare: new Array<boolean>(STEPS).fill(false),
+    hat: new Array<boolean>(STEPS).fill(false),
+    clap: new Array<boolean>(STEPS).fill(false),
+  };
+}
+
+function emptyPatternOld(): Pattern {
   return {
     kick: row([]),
     snare: row([]),
