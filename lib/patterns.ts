@@ -47,15 +47,6 @@ export function emptyPattern(): Pattern {
   };
 }
 
-function emptyPatternOld(): Pattern {
-  return {
-    kick: row([]),
-    snare: row([]),
-    hat: row([]),
-    clap: row([]),
-  };
-}
-
 /** The pattern on first load: a house-style beat every row takes part in. */
 export const DEFAULT_PATTERN: Pattern = {
   kick: row([0, 4, 8, 12]),
