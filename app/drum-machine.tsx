@@ -255,54 +255,60 @@ export function DrumMachine() {
           Tap a step to toggle it. Tab moves between steps; Enter or Space toggles. Muted: {mutedList.length ? mutedList.join(", ") : "none"}
         </p>
 
-        <div className="flex flex-col sm:flex-row sm:items-center sm:gap-3">
-          <div className="hidden sm:block sm:w-24 sm:shrink-0" />
-          <div className="grid flex-1 grid-cols-16 gap-0.5 sm:gap-1">
-            {Array.from({ length: STEPS }, (_, step) => (
-              <div key={step} className={cn("text-center text-[10px] text-muted-foreground", step % 4 === 3 && "sm:mr-2")}>
-                {step % 4 === 0 ? step / 4 + 1 : "·"}
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {INSTRUMENTS.map((instrument) => {
-          const muted = mutes[instrument.id];
-          return (
-            <div key={instrument.id} className={cn("flex flex-col gap-1.5 sm:flex-row sm:items-center sm:gap-3", muted && "opacity-50")}>
-              <div className="flex items-center justify-between gap-2 sm:w-24 sm:shrink-0 sm:justify-start">
-                <span className="text-sm font-medium">{instrument.label}</span>
-                <Button
-                  size="sm"
-                  variant={muted ? "secondary" : "outline"}
-                  aria-pressed={muted}
-                  onClick={() => toggleMute(instrument.id)}
-                  className="h-8 px-2"
-                >
-                  {muted ? "Muted" : "Mute"}
-                </Button>
-              </div>
-              <div role="group" aria-label={`${instrument.label} steps`} className="grid flex-1 grid-cols-16 gap-0.5 sm:gap-1">
-                {pattern[instrument.id].map((on, step) => (
-                  <button
-                    key={step}
-                    type="button"
-                    aria-label={`${instrument.label} step ${step + 1}`}
-                    aria-pressed={on}
-                    onClick={() => toggleStep(instrument.id, step)}
-                    className={cn(
-                      "h-11 rounded-md border transition-colors",
-                      "focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-1",
-                      on ? "border-primary bg-primary text-primary-foreground" : "border-border bg-secondary hover:bg-accent",
-                      currentStep === step && "bg-accent outline-2 outline-offset-0 outline-foreground",
-                      step % 4 === 3 && "sm:mr-2",
-                    )}
-                  />
+        {/* Every step cell is a fixed 32px-wide tap target; the grid scrolls sideways on narrow
+            screens while the row labels stay pinned with position: sticky. */}
+        <div className="overflow-x-auto pb-1">
+          <div className="space-y-1.5">
+            <div className="flex items-end gap-1.5" aria-hidden="true">
+              <div className="sticky left-0 z-10 w-16 shrink-0 bg-card" />
+              <div className="flex gap-0.5">
+                {Array.from({ length: STEPS }, (_, step) => (
+                  <div key={step} className={cn("w-8 shrink-0 pb-0.5 text-center text-[10px] leading-none text-muted-foreground", step % 4 === 3 && "mr-2")}>
+                    {step % 4 === 0 ? step / 4 + 1 : "·"}
+                  </div>
                 ))}
               </div>
             </div>
-          );
-        })}
+
+            {INSTRUMENTS.map((instrument) => {
+              const muted = mutes[instrument.id];
+              return (
+                <div key={instrument.id} className={cn("flex items-center gap-1.5", muted && "opacity-50")}>
+                  <div className="sticky left-0 z-10 flex w-16 shrink-0 flex-col items-center gap-1 self-stretch bg-card py-0.5">
+                    <span className="text-xs font-medium leading-tight">{instrument.label}</span>
+                    <Button
+                      size="sm"
+                      variant={muted ? "secondary" : "outline"}
+                      aria-pressed={muted}
+                      onClick={() => toggleMute(instrument.id)}
+                      className="h-7 px-1.5 text-[11px]"
+                    >
+                      {muted ? "Muted" : "Mute"}
+                    </Button>
+                  </div>
+                  <div role="group" aria-label={`${instrument.label} steps`} className="flex gap-0.5">
+                    {pattern[instrument.id].map((on, step) => (
+                      <button
+                        key={step}
+                        type="button"
+                        aria-label={`${instrument.label} step ${step + 1}`}
+                        aria-pressed={on}
+                        onClick={() => toggleStep(instrument.id, step)}
+                        className={cn(
+                          "h-11 w-8 shrink-0 rounded-md border transition-colors",
+                          "focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-1",
+                          on ? "border-primary bg-primary text-primary-foreground" : "border-border bg-secondary hover:bg-accent",
+                          currentStep === step && "bg-accent outline-2 outline-offset-0 outline-foreground",
+                          step % 4 === 3 && "mr-2",
+                        )}
+                      />
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </section>
 
       <section aria-label="Pattern actions" className="space-y-3 rounded-xl border border-border bg-card p-4">
